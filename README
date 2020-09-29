@@ -3,3 +3,4 @@
 2. 制作镜像 docker build -t yolo .  # .表示当前目录下
 3. docker run -it -p 8080:8080 --name=yolo yolo
 4. client.py
+5. https://blog.csdn.net/qq_43100178/article/details/108869756
