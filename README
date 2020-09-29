@@ -1,0 +1,5 @@
+0. pip freeze > requirements.txt
+1. 构建Dockerfile
+2. 制作镜像 docker build -t yolo .  # .表示当前目录下
+3. docker run -it -p 8080:8080 --name=yolo yolo
+4. client.py
