@@ -4,3 +4,4 @@
 3. docker run -it -p 8080:8080 --name=yolo yolo
 4. client.py
 5. https://blog.csdn.net/qq_43100178/article/details/108869756
+6. docker run -it --rm -v /home/ygwl/holmes/files/task/:/task -p 4000:9000 boat 挂载本地目录到docker镜像
