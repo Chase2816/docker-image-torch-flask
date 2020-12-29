@@ -1,0 +1,148 @@
+热斑检测系统
+http://110.188.66.99:8688/homepage.html
+ygwl
+ygwL!@#456
+
+
+ssh root@172.20.112.102  Wkag&ql4@C
+总部服务器2    http://172.20.112.102  http://110.188.66.99  root  Wkag&ql4@C
+
+pscp.exe 文件传输
+win+R，输入cmd，打开DOS，输入命令：
+pscp C:\test101.py root@172.20.112.102:/root/torch
+pscp test.py root@172.20.112.102:/home/ygwl
+pscp root@127:18.3.90:/home/ec2-user/efs/yolov3 E:\
+文件夹传输
+pscp -r C:\test101.py root@172.20.112.102:/root/torch
+
+sudo mv 1610.02357.pdf /media/canran/文件盘/book
+
+centos 
+rar x test.rar
+rm -r files
+sudo zip -r test.zip test
+sudo unzip test.zip
+
+root@172.20.112.102
+更改home/ygwl@172.20.112.102
+
+亚马逊服务器Deep Learning AMI (Amazon Linux 2) Version 27.0
+环境切换：su ec2user  source activate pytorch_p36
+sudo unzip test.zip
+ls -lh
+cd ec2user
+cd efs
+sudo chown chown -R ec2user:ec2-user yolov3
+
+移动多个文件
+mv a.txt b.xml c.jpg -t 目录
+
+
+docker命令：
+进入容器 docker exec -it 容器ID /bin/bash  退出容器 exit  ctrl+P+Q
+docker ps    docker rm -f 容器ID   docker images   dockers pull 镜像
+
+sudo docker build -t 'testflask' .  构建镜像
+sudo docker run -it --rm -p 8888:8888 testflask 运行镜像
+sudo docker run -it --rm -p 8888:8888 -v 本地目录:/镜像目录 testflask 运行镜像
+docker run -it --rm -v /home/ygwl/holmes/files/task/:/task -p 4000:9000 boat
+
+docker run -p 8601:8501 -p 8600:8500 \
+-v /home/ygwl/tensorflow-serving/model-hot:/models/model-hot \
+-e MODEL_NAME=model-hot -t tensorflow/serving
+
+
+nohup命令：
+nohup linux命令 > log.log 2>&1 &
+ nohup python legacy/train.py > log.log 2>&1 &
+
+实时查看日志：tail -f log.log
+cat log.log
+查找batch：cat log.log |grep batch | tail -1
+搜索多个关键字avg和mAP：tail -f log.log |grep -E "avg|mAP"
+查看运行的后台进程：jobs -l
+显示所有程序：ps -ef
+搜索：ps -aux|grep chat.js  ps -ef |grep darknet
+查看程序进程时间：ps -eo pid,tty,user,comm,etime | grep darknet
+用ps -def | grep查找进程很方便，最后一行总是会grep自己
+用grep -v参数可以将grep命令排除掉:ps -aux|grep chat.js| grep -v grep
+用awk提取一下进程ID:ps -aux|grep chat.js| grep -v grep | awk '{print $2}'
+rm -rf !(keep1 | keep2) #删除keep1和keep2文件之外的所有文件
+
+启动hive：
+cd /usr/local/hive/conf 
+hive
+hadoop启动 start_all.sh
+
+ssh连接服务器后台运行程序
+nohup python test.py &
+查看进程号： 
+ps -ef | grep test.py
+停止进程：
+kill -9 进程id
+
+ip: 172.18.3.248
+账户:ec2-user
+文件夹：/mnt/efs/fs1
+pass:ygwl~2630
+
+文件上传权限：chmod -R 777 /mnt/efs
+
+#密码修改
+sudo passwd root
+
+tfmodel-maskrcnn
+python object_detection/setup.py build python setup.py install  python slim/setup.py install
+
+java-maven工程打包命令 mvn clean package  idea->右侧maven->Lifecycle->clean->package
+maven打包jar测试命令 java -jar jar包.jar
+
+linux：
+#train
+./darknet detector train data/obj.data yolo-obj.cfg darknet53.conv.74 -map
+# resume
+./darknet detector train data/obj.data yolo-obj.cfg backup\yolo-obj_2000.weights
+#test
+./darknet detector test data/obj.data yolo-obj.cfg yolo-obj_8000.weights
+avg：平均loss，越小越好，
+rate：学习率，默认为0.001，可以根据自己的训练情况调整,一般为0.01，0.003，0.001等
+Region xx: cfg文件中yolo-layer的索引，82是大物体层，94是中物体层，106小物体层；
+Avg IOU: 当前迭代中，预测的box与标注的box的平均交并比，越大越好，期望数值为1；
+Class: 标注物体的分类准确率，越大越好，期望数值为1；
+obj: 越大越好，期望数值为1；
+No obj: 越小越好；
+.5R: 以IOU=0.5为阈值时候的recall; recall = 检出的正样本/实际的正样本
+0.75R: 以IOU=0.75为阈值时候的recall;
+count: 正样本数目。
+
+win10:
+https://blog.csdn.net/just_sort/article/details/103967772
+VS2017配置:https://blog.csdn.net/KID_yuan/article/details/88380269
+如何计算anchor(通过聚类得到): darknet.exe detector calc_anchors data/obj.data -num_of_clusters 9 -width 416 -height 416.
+计算mAP@IoU=50: darknet.exe detector map data/obj.data yolo-obj.cfg backup\yolo-obj_7000.weights
+计算mAP@IoU=75: darknet.exe detector map data/obj.data yolo-obj.cfg backup\yolo-obj_7000.weights -iou_thresh 0.75
+train:darknet.exe detector train data/obj.data yolo-obj.cfg darknet53.conv.74
+不展示loss曲线：-dont_show
+查看mAP和Loss曲线：darknet.exe detector train data/obj.data yolo-obj.cfg darknet53.conv.74 -dont_show -mjpeg_port 8090 -map ，然后在浏览器中打开 URL http://ip-address:8090 。
+训练的过程中同步显示mAP（每四个epoch进行一次更新），运行命令: darknet.exe detector train data/obj.data yolo-obj.cfg darknet53.conv.74 -map
+训练结束以后，将会在文件夹build\darknet\x64\backup\中得到权重文件 yolo-obj_final.weights
+继续训练：darknet.exe detector train data/obj.data yolo-obj.cfg backup\yolo-obj_2000.weights
+测试：darknet.exe detector test data/obj.data yolo-obj.cfg yolo-obj_8000.weights
+Ouf of memery问题：设置subdivisions参数，将其从原来的16提高为32或者64，这样就能降低使用的显存
+
+detect：no_gpu: darknet_no_gpu.exe
+图片测试：darknet.exe detector test cfg/coco.data cfg/yolov3.cfg yolov3.weights -thresh 0.25
+坐标输出：darknet.exe detector test cfg/coco.data yolov3.cfg yolov3.weights -ext_output dog.jpg
+视频测试: darknet.exe detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights -ext_output test.mp4
+网络摄像头: darknet.exe detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights -c 0
+网络视频摄像头 - Smart WebCam: darknet.exe detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights http://192.168.0.80:8080/video?dummy=param.mjpg
+保存视频结果为res.avi: darknet.exe detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights test.mp4 -out_filename res.avi
+处理一系列图片，并保存结果为json文件：darknet.exe detector test cfg/coco.data cfg/yolov3.cfg yolov3.weights -ext_output -dont_show -out result.json < data/train.txt
+处理一系列图片，并保存结果为txt文件:
+darknet.exe detector test cfg/coco.data cfg/yolov3.cfg yolov3.weights -dont_show -ext_output < data/train.txt > result.txt
+
+
+
+
+
+
