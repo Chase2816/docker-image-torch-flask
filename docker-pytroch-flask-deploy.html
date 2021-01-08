@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>docker-pytroch-flask-deploy</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h2><a id="_0"></a>文件目录</h2>
+<p>https://github.com/18483666678/docker-image-torch-flask<br>
+<img src="https://img-blog.csdnimg.cn/20200929154531258.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMTAwMTc4,size_16,color_FFFFFF,t_70#pic_center" alt="https://github.com/18483666678/docker-image-torch-flask"></p>
+<h3><a id="Dockerfile_3"></a>构建Dockerfile</h3>
+<pre><code class="prism language-xml"># 基础镜像
+FROM python:3.7
+
+# 代码添加到code文件夹
+ADD ./yolov5s /code
+
+# 设置code文件夹为工作目录
+WORKDIR /code
+
+# 安装依赖支持
+RUN apt-get update ##[edited]
+RUN apt-get install 'ffmpeg'\
+    'libsm6'\ 
+    'libxext6'  -y
+
+# pip freeze &gt; requirements.txt
+RUN pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
+
+RUN pip install torch-1.6.0+cpu-cp37-cp37m-linux_x86_64.whl
+
+RUN pip install torchvision-0.7.0+cpu-cp37-cp37m-linux_x86_64.whl
+
+CMD ["python","app.py"]
+</code></pre>
+<h3><a id="_29"></a>制作镜像</h3>
+<pre><code class="prism language-powershell">docker build <span class="token operator">-</span>t yolo <span class="token punctuation">.</span>  
+</code></pre>
+<p>.表示当前目录</p>
+<h3><a id="_34"></a>开启容器</h3>
+<pre><code class="prism language-powershell">docker run <span class="token operator">-</span>it <span class="token operator">-</span>p 8080:8080 <span class="token operator">--</span>name=yolo yolo
+</code></pre>
+<p>挂载8080端口到8080，Ctrl+P+Q后台运行，命令加-d直接后台运行。</p>
+<h3><a id="_39"></a>服务调用</h3>
+<p>client.py</p>
+</div>
+</body>
+
+</html>
